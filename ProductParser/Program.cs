@@ -1,6 +1,9 @@
+using ProductParser;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.AddService();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
