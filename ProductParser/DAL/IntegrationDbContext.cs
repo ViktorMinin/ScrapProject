@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using ProductParser.DAL.Models;
 
 namespace ProductParser.DAL;
 
@@ -29,5 +30,8 @@ public sealed class IntegrationDbContext : DbContext
         //optionsBuilder.UseSqlServer("Initial Catalog=KafeDev;Data Source=.\\Resto;User ID=resto;Password=resto#test;TrustServerCertificate=True;");
     }
     #region Models
+
+    public DbSet<ProductModel> Product { get; set; }
+    
     #endregion
 }

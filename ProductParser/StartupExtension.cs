@@ -11,6 +11,23 @@ public static class StartupExtension
             .GetConnectionString("DefaultConnection");
         builder.Services.AddDbContextPool<IntegrationDbContext>
             (o => o.UseNpgsql(connectionString));
+
+        builder.Services.AddHttpClient("SRequest",
+            (sp, http) =>
+            {
+                http.BaseAddress = new Uri("https://vkusmart.vmv.kz/catalog/");
+                http.Timeout = TimeSpan.FromMinutes(5);
+
+                http.DefaultRequestHeaders.Add("Connection", "keep-alive");
+            });
+        builder.Services.AddHttpClient("VRequest",
+            (sp, http) =>
+            {
+                http.BaseAddress = new Uri("https://vkusmart.vmv.kz/catalog/");
+                http.Timeout = TimeSpan.FromMinutes(5);
+
+                http.DefaultRequestHeaders.Add("Connection", "keep-alive");
+            });
     }
     public static void AddMigration(this WebApplication app)
     {
