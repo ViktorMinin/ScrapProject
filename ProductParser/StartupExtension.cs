@@ -1,5 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using ProductParser.DAL;
+using ProductParser.DAL.Repository;
+using ProductParser.Service;
+using ProductParser.Service.Impl;
 
 namespace ProductParser;
 
@@ -12,6 +15,8 @@ public static class StartupExtension
         builder.Services.AddDbContextPool<IntegrationDbContext>
             (o => o.UseNpgsql(connectionString));
 
+        builder.Services.AddScoped<IMangaService, MangaService>();
+        builder.Services.AddScoped<IMangaRepository, MangaRepository>();
     }
     public static void AddMigration(this WebApplication app)
     {
