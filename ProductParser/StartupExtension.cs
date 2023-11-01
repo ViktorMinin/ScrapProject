@@ -8,26 +8,10 @@ public static class StartupExtension
     public static void AddService(this WebApplicationBuilder builder)
     {
         var connectionString = builder.Configuration
-            .GetConnectionString("DefaultConnection");
+            .GetConnectionString("PostgreSql");
         builder.Services.AddDbContextPool<IntegrationDbContext>
             (o => o.UseNpgsql(connectionString));
 
-        builder.Services.AddHttpClient("SRequest",
-            (sp, http) =>
-            {
-                http.BaseAddress = new Uri("https://vkusmart.vmv.kz/catalog/");
-                http.Timeout = TimeSpan.FromMinutes(5);
-
-                http.DefaultRequestHeaders.Add("Connection", "keep-alive");
-            });
-        builder.Services.AddHttpClient("VRequest",
-            (sp, http) =>
-            {
-                http.BaseAddress = new Uri("https://vkusmart.vmv.kz/catalog/");
-                http.Timeout = TimeSpan.FromMinutes(5);
-
-                http.DefaultRequestHeaders.Add("Connection", "keep-alive");
-            });
     }
     public static void AddMigration(this WebApplication app)
     {

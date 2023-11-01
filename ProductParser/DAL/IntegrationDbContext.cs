@@ -30,8 +30,11 @@ public sealed class IntegrationDbContext : DbContext
         //optionsBuilder.UseSqlServer("Initial Catalog=KafeDev;Data Source=.\\Resto;User ID=resto;Password=resto#test;TrustServerCertificate=True;");
     }
     #region Models
-
-    public DbSet<ProductModel> Product { get; set; }
     
+    public DbSet<MangaModel> Manga { get; set; }
+    public DbSet<AuthorModel> Author { get; set; }
+    public DbSet<GenreModel> Genre { get; set; }
+    public DbSet<MangaAuthor> MangaAuthors { get; set; }
+    public DbSet<MangaGenre> MangaGenres { get; set; }
     #endregion
 }
