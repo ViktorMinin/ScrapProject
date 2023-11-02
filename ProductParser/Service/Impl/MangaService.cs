@@ -53,9 +53,10 @@ public class MangaService : IMangaService
 
                                 manga.OriginalName = titleOriginalNameNode?.InnerText ?? "Empty";
                                 manga.RusName = titleSecondNameNode?.InnerText ?? "Empty";
+                                manga.TitleUrl = url + titleHref;
                                 
                                 var keyTypeDiv = titleDoc.DocumentNode.SelectSingleNode("//div[@class='key' and text()='Тип:']");
-                                
+                                manga.Type = "None";
                                 if (keyTypeDiv != null)
                                 {
                                     HtmlNode valueDiv = keyTypeDiv.ParentNode.SelectSingleNode(".//div[@class='value']");
@@ -71,6 +72,15 @@ public class MangaService : IMangaService
                                     manga.TitleStatus = valueDiv.SelectSingleNode(".//span")?.InnerText.Replace("\n","") ?? "None";
                                     
                                 }
+                                
+                                var keyImageDiv = titleDoc.DocumentNode.SelectSingleNode("//img[@itemprop='image']");
+                                
+                                if (keyImageDiv != null)
+                                {
+                                    manga.ImageUrl = url + keyImageDiv.GetAttributeValue("src", "");
+
+                                }
+                                
                                 var keyUnlateDiv = titleDoc.DocumentNode.SelectSingleNode("//div[@class='key' and text()='Перевод:']");
                                 
                                 if (keyUnlateDiv != null)
@@ -106,17 +116,26 @@ public class MangaService : IMangaService
 
                                 var authors =
                                     titleDoc.DocumentNode.SelectNodes("//a[@class='b-tag Tooltip bubbled-processed']");
-                                foreach (var author in authors)
-                                {
-                                    if (author.GetAttributeValue("href", "").Contains("manga?people"))
-                                        authorModels.Add(
-                                            new AuthorModel
-                                            {
-                                                AuthorHref = url+author.GetAttributeValue("href", ""),
-                                                AuthorName = author?.InnerText ?? "None"
-                                            }
-                                );
-                                }
+                                if(authors is not null)
+                                    foreach (var author in authors)
+                                    {
+                                        if (author.GetAttributeValue("href", "").Contains("manga?people"))
+                                            authorModels.Add(
+                                                new AuthorModel
+                                                {
+                                                    AuthorHref = url+author.GetAttributeValue("href", ""),
+                                                    AuthorName = author?.InnerText ?? "None"
+                                                }
+                                            );
+                                    }
+
+                                var mangaCount = titleDoc.DocumentNode.SelectNodes("//a[@class='tips Tooltip']");
+
+                                manga.ChapterCount = mangaCount?.Count ?? 0;
+
+                                var score = titleDoc.DocumentNode.SelectSingleNode("//div[contains(@class, 'score-value')]");
+
+                                manga.Rating = Convert.ToDouble(score?.InnerText.Replace(".",",") ?? "0");
                                 
                                 lock (lockMe)
                                 {
@@ -129,8 +148,14 @@ public class MangaService : IMangaService
                                 }
                             }
                         });
-                    var x = mangas;
-                    var nextNode = doc.DocumentNode.SelectSingleNode("//a[@class='text']");
+                    await _mangaRepository.AddManga(mangas);
+                    var nextNodes = doc.DocumentNode.SelectNodes("//a[@class='text']");
+                    HtmlNode? nextNode = null;
+                    foreach (var next in nextNodes)
+                    {
+                        if (next.InnerText.Contains("Вперёд"))
+                            nextNode = next;
+                    }
                     if(nextNode is null)
                         break;
                     nextPageUrl = nextNode.GetAttributeValue("href", "");

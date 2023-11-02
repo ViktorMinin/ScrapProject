@@ -11,6 +11,7 @@ public class MangaModel
     public string? TitleStatus { get; set; }
     public string? UnlateStatus { get; set; }
     public string? ImageUrl { get; set; }
+    public string? TitleUrl { get; set; }
     public int? ChapterCount { get; set; }
 }
 

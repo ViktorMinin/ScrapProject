@@ -126,6 +126,9 @@ namespace ProductParser.Migrations
                     b.Property<string>("TitleStatus")
                         .HasColumnType("text");
 
+                    b.Property<string>("TitleUrl")
+                        .HasColumnType("text");
+
                     b.Property<string>("Type")
                         .IsRequired()
                         .HasColumnType("text");

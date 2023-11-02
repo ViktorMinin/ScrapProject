@@ -5,5 +5,5 @@ namespace ProductParser.DAL.Repository;
 
 public interface IMangaRepository
 {
-    public Task<bool> AddMange(List<MangaInfo> manga);
+    public Task<bool> AddManga(List<MangaInfo> manga);
 }

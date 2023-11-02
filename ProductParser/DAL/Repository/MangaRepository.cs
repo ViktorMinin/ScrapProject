@@ -13,7 +13,7 @@ public class MangaRepository : IMangaRepository
         _context = context;
     }
 
-    public async Task<bool> AddMange(List<MangaInfo> manga)
+    public async Task<bool> AddManga(List<MangaInfo> manga)
     {
         foreach (var title in manga)
         {
@@ -43,8 +43,10 @@ public class MangaRepository : IMangaRepository
                         .SetProperty(p => p.Rating, title.Manga.Rating)
                         .SetProperty(p => p.ChapterCount, title.Manga.ChapterCount)
                         .SetProperty(p => p.TitleStatus, title.Manga.TitleStatus)
-                        .SetProperty(p => p.UnlateStatus, title.Manga.TitleStatus)
-                        .SetProperty(p => p.ViewCount, title.Manga.ViewCount));
+                        .SetProperty(p => p.UnlateStatus, title.Manga.UnlateStatus)
+                        .SetProperty(p => p.ViewCount, title.Manga.ViewCount)
+                        .SetProperty(p=> p.TitleUrl, title.Manga.TitleUrl)
+                        .SetProperty(p=> p.ImageUrl, title.Manga.ImageUrl));
             if (titleUpdate < 1)
                 await _context.Manga.AddAsync(title.Manga);
             var result = await _context.SaveChangesAsync();
