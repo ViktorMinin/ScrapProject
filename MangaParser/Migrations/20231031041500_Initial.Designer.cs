@@ -24,7 +24,7 @@ namespace ProductParser.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("ProductParser.DAL.Models.ProductModel", b =>
+            modelBuilder.Entity("MangaParser.DAL.Models.ProductModel", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()

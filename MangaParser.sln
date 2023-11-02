@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductParser", "ProductParser\ProductParser.csproj", "{E93DDF28-E7E8-46AB-81BE-D077AC4347B9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MangaParser", "MangaParser\MangaParser.csproj", "{E93DDF28-E7E8-46AB-81BE-D077AC4347B9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -22,7 +22,7 @@ namespace ProductParser.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("ProductParser.DAL.Models.AuthorModel", b =>
+            modelBuilder.Entity("MangaParser.DAL.Models.AuthorModel", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -41,7 +41,7 @@ namespace ProductParser.Migrations
                     b.ToTable("Author");
                 });
 
-            modelBuilder.Entity("ProductParser.DAL.Models.GenreModel", b =>
+            modelBuilder.Entity("MangaParser.DAL.Models.GenreModel", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -62,7 +62,7 @@ namespace ProductParser.Migrations
                     b.ToTable("Genre");
                 });
 
-            modelBuilder.Entity("ProductParser.DAL.Models.MangaAuthor", b =>
+            modelBuilder.Entity("MangaParser.DAL.Models.MangaAuthor", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -81,7 +81,7 @@ namespace ProductParser.Migrations
                     b.ToTable("MangaAuthors");
                 });
 
-            modelBuilder.Entity("ProductParser.DAL.Models.MangaGenre", b =>
+            modelBuilder.Entity("MangaParser.DAL.Models.MangaGenre", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -100,7 +100,7 @@ namespace ProductParser.Migrations
                     b.ToTable("MangaGenres");
                 });
 
-            modelBuilder.Entity("ProductParser.DAL.Models.MangaModel", b =>
+            modelBuilder.Entity("MangaParser.DAL.Models.MangaModel", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
